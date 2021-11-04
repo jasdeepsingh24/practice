@@ -4,7 +4,7 @@ const {products}=require('./data');
 const logger=require('./logger');
 const authorize=require('./authorize');
 
-app.use('/api',[authorize,logger]);
+app.use('/api',[logger]);
 
 app.get('/',(req,res)=>{
     res.send('Home');
@@ -16,7 +16,7 @@ app.get('/api/products',(req,res)=>{
         return {Id,Title,Url};
     });
     console.log(req.user);
-    res.json(newProduct);
+    res.status(200).json(newProduct);
 });
 
 app.get('/api/products/:productId',(req,res)=>{
