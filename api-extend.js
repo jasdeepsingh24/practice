@@ -2,6 +2,8 @@ const express=require('express');
 const app=express();
 let {products}=require('./data');
 
+app.use(express.json());
+
 // app.use(express.static('./'))
 
 app.post('/login',(req,res)=>{
@@ -24,6 +26,21 @@ app.post('api/people',(req,res)=>{
         return res.status(400).json({success:false, msg:'please provide name value'});
     }
     res.status(201).json({success:true,person:name});
+});
+
+app.post('/api/postman/people',(req,res)=>{
+    const body=req.body;
+    // if(!body.name)
+    //     return res.json({success:false,msg:'plase provide name'});
+    return res.json({success:true,name:body.name});
+});
+
+app.put('/api/people/:id',(req,res)=>{
+    const {id}=req.params;
+    const {name}=req.body;
+
+    console.log(id,name);
+
 });
 
 console.log('dev');
